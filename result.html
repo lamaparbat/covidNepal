@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Live Test Result</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<style>
+		#main_container .row .col-sm-8 table{
+			height:150px;
+		}
+	</style>
+</head>
+<body><br>
+	<div class="container" id="main_container">
+		<h3 class="text-success"><img src="https://media.edusanjal.com/logos/Herald_logo.JPG" height="100px" width="150px">Result Board 2021</h3>
+		<div class="row">
+			<!-- Table Data and Input -->
+			<div class="col-sm-8">
+				<!-- table data -->
+				<table class="table table-responsive">
+				  <thead>
+				    <tr>
+				      <th scope="col">Name</th>
+				      <th scope="col">CS01</th>
+				      <th scope="col">CS02</th>
+				      <th scope="col">CS03</th>
+				      <th scope="col">Action</th>
+				    </tr>
+				  </thead>
+				  <tbody id="tbody"></tbody>
+				</table><br><br>
+				<!-- /end table data -->
+
+				<!-- input -->
+				<label>Student Name</label>
+				<input class="form-control" type="text" name="name" id="name" placeholder="Enter your name"><br>
+				<label>Cs01 Marks</label>
+				<input class="form-control" type="text" name="cs01" id="cs01" placeholder="Enter cs01 Marks"><br>
+				<label>Cs02 Marks</label>
+				<input class="form-control" type="text" name="cs02" id="cs02" placeholder="Enter  cs02 Marks"><br>
+				<label>Cs03 Marks</label>
+				<input class="form-control" type="text" name="cs03" id="cs03" placeholder="Enter cs03 Marks"><br>
+				<button class="btn btn-primary" id="submit" onclick="submit()">Append</button>
+
+			</div>
+			<!-- /end Table Data and Input -->
+
+			<div class="col-sm-4 bg-light"><br>
+				<h4 class="text-info">Report Monitor</h4><hr>
+				<h6><b>Student Name: <span class="text-success" id="sname"></span></b></h6>
+				<h6><b>Total Marks: <span class="text-success" id="total"></span></b></h6>
+				<h6><b>Rank: <span class="text-success" id="rank"></span></b></h6>
+				<h6><b>Percentage: <span class="text-success" id="percentage"></span></b></h6><br><hr>
+
+				<h4 class="text-info">College Topper List</h4><br>
+				<p>First: <span id="first"></span></p>
+				<p>Second:<span id="second"></span></p>
+				<p>Third: <span id="third"></span></p>
+			</div>
+
+		</div>
+	</div>
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+	list = []
+	class Students{
+		constructor(name, cs01, cs02, cs03){
+			this.name = name
+			this.cs01 = cs01
+			this.cs02 = cs02
+			this.cs03 = cs03
+		}
+	}
+	function displayTopper(dict){
+		let max = dict[0] 
+		for(let key in dict){
+			console.log(value)
+		}
+		console.log(dict)
+		// document.querySelector('#main_container .row .col-sm-4 #first').textContent = list[id].name
+	}
+	function diplayData(){
+		let rank = null, rank_list = {}
+		let html = ''
+		//appending and display data in table 
+		list.forEach(function(data, index){
+			 html += `<tr>
+			      <td>${data.name}</td>
+			      <td>${data.cs01}</td>
+			      <td>${data.cs02}</td>
+			      <td>${data.cs03}</td>
+			      <td><button class="btn btn-danger" onclick="remove(${index})">Delete</button></td>
+			      <td><button class="btn btn-info" onclick="showReport(${index})">Show Report</button></td>
+			    </tr>
+			`
+			$("#main_container .row .col-sm-8 table tbody").html(html)
+
+			//determining topper
+			let total_marks_sum = parseInt(list[index].cs01)+parseInt(list[index].cs02)+parseInt(list[index].cs03)
+			rank_list[index] = total_marks_sum
+		})
+
+		displayTopper(rank_list)
+	}
+
+	function remove(id){
+		list.splice(id,1)
+		diplayData()
+		console.log(list)
+	}
+
+	function showReport(id){
+		let obj = list[id]
+		let total = parseInt(obj.cs01)+parseInt(obj.cs02)+parseInt(obj.cs03)
+		let percentage = (total/300)*100
+		let rank = list.length
+		//entire traversing
+		let total_marks_sum = 0
+		list.forEach(function(data,index){
+			if(index != id){
+				let total_marks_sum = parseInt(data.cs01)+parseInt(data.cs02)+parseInt(data.cs03)
+				if(rank != 0 && rank != 1){
+					if(total>total_marks_sum){
+						rank -= 1
+					}
+				}
+			}
+		})
+
+		//DOM HANDLING
+		document.querySelector('#main_container .row .col-sm-4 #sname').textContent = obj.name
+		document.querySelector('#main_container .row .col-sm-4 #total').textContent = total
+		document.querySelector('#main_container .row .col-sm-4 #rank').textContent = rank+"/"+list.length
+		document.querySelector('#main_container .row .col-sm-4 #percentage').textContent = percentage+"%"
+	}
+
+	function submit(){
+		let name = document.getElementById('name').value
+		let cs01 = document.getElementById('cs01').value
+		let cs02 = document.getElementById('cs02').value
+		let cs03 = document.getElementById('cs03').value
+
+		let std = new Students(name, cs01, cs02, cs03)
+		list.push(std)
+
+		diplayData()
+	}
+
+
+</script>
+</body>
+</html>

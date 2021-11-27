@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Saira+Condensed:wght@300&display=swap');
+.navbar{
+	z-index: 1;
+}
+.navbar .navbar-brand{
+	font-family: 'Kaushan Script', cursive;
+}
+.navbar .navbar-collapse .navbar-nav{
+	margin-right: 100px;
+}
+.navbar .navbar-collapse .navbar-nav .nav-item{
+	margin-left: 15px;
+	font-family: 'Kaushan Script', cursive;
+    font-family: 'Saira Condensed', sans-serif;
+}
+
+/*preloader*/
+#preloader{
+	height: 100vh;
+	width: 100%;
+	background-image: url("loader.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index:444;
+}
+
+/* covid information */
+.main .row #update #title{
+	border-top: none;
+	border-bottom: none;
+	border-right: none;
+	border-left: 4px solid #1C4D92;
+	color: #4492DB;
+	background-color: #EEEEEE;
+	font-size: 20px;
+	font-family: 'Kaushan Script', cursive;
+    font-family: 'Saira Condensed', sans-serif;
+}
+.main .row #update h6{
+	border: 0;
+	color: #4492DB;
+	font-size: 18px;
+	font-family: 'Kaushan Script', cursive;
+    font-family: 'Saira Condensed', sans-serif;
+}
+.main .row #update h6:hover{
+	border-top: none;
+	border-bottom: none;
+	border-right: none;
+	border-left: 4px solid #1C4D92;
+	transition: 0.2s;
+	cursor: pointer;
+}
+.main .row #data h2{
+	font-weight: bolder;
+}
+.main .row #data{
+	font-family: 'Kaushan Script', cursive;
+    font-family: 'Saira Condensed', sans-serif;
+}
+.main .row #data .row .col-sm-12 .row .col-sm-6 div p{
+	margin-top: -5px;
+	font-size: 25px;
+}
+.main .row #data #cases .col-sm-4 p{
+	margin-top: -5px;
+}
+.main .row #data #cases .col-sm-4 h5{
+	margin-top: -10px;
+	font-size: 16px;
+	font-color:black;
+	font-weight: bolder;
+}
+.main .row #data #cases .col-sm-4 #postive_case{
+	margin-top: -10px;
+	font-size: 25px;
+	font-weight: bolder;
+}
+.main .row #data #cases .col-sm-4 #negative_case{
+	margin-top: -10px;
+	font-size: 25px;
+	font-weight: bolder;
+}
+.main .row #data #cases .col-sm-4 #deaths{
+	margin-top: -10px;
+	font-size: 25px;
+	font-weight: bolder;
+}
+.main .row #data #cases .col-sm-4 #isolation{
+	margin-top: -10px;
+	font-size: 25px;
+	font-weight: bolder;
+}
+.main .row #data #cases .col-sm-4 #recovered{
+	margin-top: -10px;
+	font-size: 25px;
+	font-weight: bolder;
+}
+/*responsive code*/
+@media(max-width: 1100px){
+	.main .row #data h2{
+		font-size: 20px;
+	}
+	.main .row #data .row .col-sm-12 .row .col-sm-3 h4{
+		font-size: 20px;
+	}
+	.main .row #data .row .col-sm-12 .row .col-sm-6 div p{
+		font-size: 16px;
+	}
+}
